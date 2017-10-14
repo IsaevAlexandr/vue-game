@@ -1,0 +1,42 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    font-family: 'PixelDigivolveCyrillic', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.42;
+    @include tab {
+        font-size: 15px;
+    }
+    @include mob {
+        font-size: 13px;
+    }
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+#app {
+    width: 100%;
+    min-width: 768px;
+    height: 100%;
+    min-height: 1024px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
