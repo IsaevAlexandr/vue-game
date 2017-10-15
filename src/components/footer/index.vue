@@ -7,24 +7,21 @@
             .sign >
         .answers
             ul.list
-                li.items
-                    .number 1
-                    .answer-text .getJSON()
-                li.items
-                    .number 2
-                    .answer-text .getScript()
-                li.items
-                    .number 3
-                    .answer-text .json()
-                li.items
-                    .number 4
-                    .answer-text .ajax()
+                app-question-item(
+                    v-for='(i, index) in 4'
+                    :number='i'
+                    :key='index'
+                )
 
 </template>
 
 <script>
-export default {
+import appQuestionItem from '../question-item';
 
+export default {
+    components: {
+        appQuestionItem
+    }
 }
 </script>
 
@@ -54,34 +51,10 @@ export default {
     }
     .list {
         display: flex;
-    flex-wrap: wrap;
-
-        
+        flex-wrap: wrap;
     }
-.items {
-    display: flex;
-    flex: 50%;
-    margin-bottom: rem(25px);
-}
 
 
-.number {
-background-color: #c3c421;
-padding: rem(18px) rem(0px);
-width: rem(70px);
-text-align: center;
-color: $black;
-font-size: rem(49px);
-font-weight: 400;
-align-self: center;
-margin-right: rem(40px);
-}
-.answer-text {
-color: $white;
-font-size: rem(40px);
-font-weight: 400;
-line-height: rem(56.22px);
-align-self: center;
 
-}
+
 </style>

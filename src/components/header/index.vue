@@ -5,16 +5,20 @@
             .lvl lvl {{lvl}} 
             .vertical-line | 
             .js {{scill}}
+            .hearts(v-for='heart in hearts')
         .right #br41n570rm
 </template>
-
 <script>
 export default {
     data(){
         return {
             lvl: 1,
-            scill: 'js'
+            scill: 'js',
+            hearts: 3
         }
+    },
+    methods: {
+        
     }
 }
 </script>
@@ -41,6 +45,15 @@ export default {
         margin-right: rem(5px);
         font-size: rem(35px);
         font-weight: 400;
+    }
+    .hearts {
+        width: rem(45px);
+        height: rem(42px);
+        opacity: 0.6;
+        background: url('~images/heart.png');
+        @include image;
+        align-self: center;
+        margin-right: rem(5px);
     }
 
     .right {

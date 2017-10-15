@@ -40,3 +40,58 @@ h6 {
     display: flex;
     flex-direction: column;
 }
+
+.content {
+    position: relative;
+    flex: 1;
+    background: url('~images/background-01.svg');
+    @include image;
+    min-height: rem(650px);
+    background-position-y: 100%;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('~images/front-01.svg');
+        @include image;
+    }
+    /* должны быть одинаковые с футером */
+    padding: rem(10px) rem(10px) rem(0px) rem(10px);
+}
+
+.footer {
+    width: 100%;
+    min-height: rem(200px);
+    display: flex;
+    background-color: #54422a;
+    justify-content: center;
+}
+
+.left {
+    // max-width: rem(250px);
+    display: flex;
+    height: rem(200px);
+}
+
+.text,
+.sign {
+    color: $white;
+    font-size: rem(49px);
+    font-weight: 400;
+    align-self: center;
+}
+
+.text {
+    line-height: rem(56px);
+    white-space: pre;
+    text-align: right;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+}

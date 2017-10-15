@@ -1,23 +1,48 @@
 <template lang='pug'>
   #app
-    app-content
-    app-footer
+    .content
+      app-header
+      app-firebool
+      app-hero(
+          :question='question'
+      )
+      app-ork
+    .footer
+      .left 
+        .text 
+            |твой 
+            |ответ? 
+        .sign >
+      .answers
+        ul.list
+          app-question-item(
+            v-for='(i, index) in 4'
+            :number='i'
+            :key='index'
+          )
 </template>
 
 <script>
-import appContent from './components/content'
-import appFooter from './components/footer'
+import appHeader from './components/header';
+import appHero from './components/hero';
+import appOrk from './components/ork';
+import appFirebool from './components/fireboll';
+import appQuestionItem from './components/question-item';
 
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      question: 'Каким методом нельзя сделать AJAX запрос в jQuery?'
     }
   },
   components:{
-    appContent,
-    appFooter
+    // appContent,
+    appHeader,
+    appHero,
+    appOrk,
+    appFirebool,
+    appQuestionItem
   }
 }
 </script>
