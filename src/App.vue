@@ -4,10 +4,10 @@
       app-header
       app-firebool
       app-hero(
-          :question='question'
+          :question='getQuestions.questions.question.questions_title'
       )
       app-ork
-    .footer
+    .footer(@click='getQ')
       .left 
         .text 
             |твой 
@@ -29,6 +29,8 @@ import appOrk from './components/ork';
 import appFirebool from './components/fireboll';
 import appQuestionItem from './components/question-item';
 
+import {mapActions, mapGetters, mapMutations} from 'vuex'
+
 export default {
   name: 'app',
   data () {
@@ -36,13 +38,28 @@ export default {
       question: 'Каким методом нельзя сделать AJAX запрос в jQuery?'
     }
   },
+  computed: {
+    ...mapGetters(['getQuestions']),
+  },
   components:{
-    // appContent,
     appHeader,
     appHero,
     appOrk,
     appFirebool,
     appQuestionItem
+  },
+  methods: {
+    ...mapActions(['fetchQuestions']),
+    ...mapMutations([]),
+
+
+    getQ(){
+      console.log(this.getQuestions);
+    }
+  },
+  created(){
+    console.log("we in!")
+    this.fetchQuestions();
   }
 }
 </script>
