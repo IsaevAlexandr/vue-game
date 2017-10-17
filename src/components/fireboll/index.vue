@@ -13,9 +13,9 @@ export default {
     methods: {
         addFlightClass(){
             this.isFlight = true;
-            setTimeout(()=>{
-                this.isFlight = false;
-            }, 2000)
+            // setTimeout(()=>{
+            //     this.isFlight = false;
+            // }, 2000)
         }
     }
 }
@@ -36,13 +36,12 @@ export default {
 }
 
 .flight {
-    animation: flight 5s;
+    animation: flight 1s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes flight {
-    30% {transform: translateX(250%) rotate(90deg)};
-    60% {transform: translateX(450%) rotate(90deg)};
-    70%{transform: translateX(0)}
+    100% {transform: translateX(400px)}
 }
 
 </style>

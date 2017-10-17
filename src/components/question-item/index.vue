@@ -1,5 +1,7 @@
 <template lang='pug'>
-    li
+    li(
+        @click='checkAnswer'
+    )
         .number {{number}}
         .text {{text}}
 </template>
@@ -14,6 +16,12 @@ export default {
         text: {
             type: String,
             default: 'Вопрос'
+        }
+    },
+    methods:{
+        checkAnswer(text){
+            // console.log(this.text)
+            this.$emit('checkAnswer',this.text);
         }
     }
 }

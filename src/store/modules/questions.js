@@ -1,15 +1,38 @@
+import shuffleArray from './shuffleArray'
+
 const questions = {
 
     state: {
-        data: [],
+        queue: [],
+        currentQuestion: {},
+        answers: [],
+        attempt: 10,
+        lvl: 1
     },
     getters: {
-        getQuestions(state) {
-            return state.data;
+        currentQuestion(state) {
+            return state.currentQuestion;
+        },
+        lvl(state) {
+            return state.lvl;
+        },
+        answers(state) {
+            return state.answers;
+        },
+        attempt(state) {
+            return state.attempt;
         }
     },
     mutations: {
-
+        reduceAttempt(state) {
+            return state.attempt--;
+        },
+        addLvl(state) {
+            return state.lvl++;
+        },
+        nextQuestion(state) {
+            return state.currentQuestion = state.queue.pop();
+        }
     },
     actions: {
         fetchQuestions({ state, rootGetters }) {
@@ -17,8 +40,13 @@ const questions = {
 
             $http.get('/src/components/data.json')
                 .then(response => {
-                    state.data = response.body;
-                    // console.log(state.data.questions.question.answers[2]);
+                    response.body.questions.forEach(function(question) {
+                        shuffleArray(question.answers);
+                    }, this);
+                    shuffleArray(response.body.questions);
+                    state.queue = response.body.questions;
+                    state.currentQuestion = response.body.questions.pop();
+                    state.answers = response.body.answers;
                 }, error => {
                     console.error(error);
                 })

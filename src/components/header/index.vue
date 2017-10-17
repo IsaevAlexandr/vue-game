@@ -2,7 +2,7 @@
     header
         .hero-info
             .avatar
-            .lvl lvl {{lvl}} 
+            .lvl lvl {{playerLvl}} 
             .vertical-line | 
             .js {{scill}}
             .hearts(v-for='heart in hearts')
@@ -13,8 +13,18 @@ export default {
     data(){
         return {
             lvl: 1,
-            scill: 'js',
-            hearts: 3
+            scill: 'js'
+            // hearts: 3
+        }
+    },
+    props: {
+        hearts: {
+            type: Number,
+            default: 3
+        },
+        playerLvl: {
+            type: Number,
+            default: 1
         }
     },
     methods: {

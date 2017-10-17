@@ -1,13 +1,31 @@
 {
-    "questions": {
-        "question": {
+    "questions": [{
             "id": 1,
             "questions_title": "Что вернет этот код:\nvar y = 1, x = y = typeof x;\nx;",
             "answers": ["undefibed", "'undefibed'", "1", "number"]
+        },
+        {
+            "id": 2,
+            "questions_title": "Второй вопрос",
+            "answers": ["лала", "фаф", "2", "ямба"]
+        },
+        {
+            "id": 3,
+            "questions_title": "Третий вопрос",
+            "answers": ["па", "21", "афы", "правильный ответ"]
         }
-    },
-    "answer": {
-        "question": 1,
-        "is_correct": "'undefibed'"
-    }
+    ],
+    "answers": [{
+            "id": 1,
+            "is_correct": "'undefibed'"
+        },
+        {
+            "id": 2,
+            "is_correct": "фаф"
+        },
+        {
+            "id": 3,
+            "is_correct": "правильный ответ"
+        }
+    ]
 }

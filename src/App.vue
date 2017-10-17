@@ -1,13 +1,17 @@
 <template lang='pug'>
   #app
+    //- pre {{currentQuestion}}
     .content
-      app-header
+      app-header(
+        :hearts='attempt'
+        :playerLvl='lvl'
+      )
       app-firebool
       app-hero(
-          :question='getQuestions.questions.question.questions_title'
+        :question='currentQuestion.questions_title'
       )
       app-ork
-    .footer(@click='getQ')
+    .footer
       .left 
         .text 
             |твой 
@@ -16,9 +20,11 @@
       .answers
         ul.list
           app-question-item(
-            v-for='(i, index) in 4'
-            :number='i'
+            v-for='(answer, index) in currentQuestion.answers'
+            :number='index + 1'
+            :text='answer'
             :key='index'
+            @checkAnswer='chekAnsw'
           )
 </template>
 
@@ -29,17 +35,20 @@ import appOrk from './components/ork';
 import appFirebool from './components/fireboll';
 import appQuestionItem from './components/question-item';
 
+/* функция для перемешивания элементов массива */
+import shuffleArray from './store/modules/shuffleArray.js'
+
 import {mapActions, mapGetters, mapMutations} from 'vuex'
 
 export default {
   name: 'app',
   data () {
     return {
-      question: 'Каким методом нельзя сделать AJAX запрос в jQuery?'
+      
     }
   },
   computed: {
-    ...mapGetters(['getQuestions']),
+    ...mapGetters(['currentQuestion','answers','attempt','lvl']),
   },
   components:{
     appHeader,
@@ -50,15 +59,29 @@ export default {
   },
   methods: {
     ...mapActions(['fetchQuestions']),
-    ...mapMutations([]),
-
-
-    getQ(){
-      console.log(this.getQuestions);
+    ...mapMutations(['reduceAttempt','addLvl','nextQuestion']),
+    chekAnsw(text){
+      this.answers.forEach(answer => {
+        if (answer.id === this.currentQuestion.id) {
+          if (answer.is_correct === text){
+            this.rightAnswer();
+            this.nextQuestion();
+          } else {
+            this.wrongAnswer();
+          }
+        }
+      });
+    },
+    rightAnswer(){
+      console.log('правильно')
+      this.addLvl();
+    },
+    wrongAnswer(){
+      console.log('не правильно')
+      this.reduceAttempt();
     }
   },
   created(){
-    console.log("we in!")
     this.fetchQuestions();
   }
 }
