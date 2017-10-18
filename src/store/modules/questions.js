@@ -7,11 +7,13 @@ const questions = {
         currentQuestion: {},
         answers: [],
         attempt: 3,
-        lvl: 1
+        lvl: 1,
+        progressStep: 0,
+        progress: 100
     },
     getters: {
-        queue(state) {
-            return state.queue;
+        progress(state) {
+            return state.progress;
         },
         currentQuestion(state) {
             return state.currentQuestion;
@@ -47,6 +49,9 @@ const questions = {
             let tmpObj = {};
             Object.assign(tmpObj, state.currentQuestion)
             return state.queue.push(tmpObj);
+        },
+        updateProgress(state) {
+            return state.progress -= state.progressStep;
         }
     },
     actions: {
@@ -59,6 +64,7 @@ const questions = {
                         shuffleArray(question.answers);
                     });
                     shuffleArray(response.body.questions);
+                    state.progressStep = 100 / response.body.questions.length;
                     state.currentQuestion = response.body.questions.pop();
                     state.queue = response.body.questions;
                     state.answers = response.body.answers;

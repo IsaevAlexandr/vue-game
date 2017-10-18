@@ -4,14 +4,23 @@
         .ork-hp
             .hp-percent {{percent}} %
             .hp-bar
+                .current-hp(
+                    :style="{ width:percent + '%'}"
+                )
         .ork-img
 </template>
 
 <script>
 export default {
+    props: {
+        percent: {
+            type: Number,
+            default: 50
+        }
+    },
     data(){
         return {
-            percent: 100
+           
         }
     }
 }
@@ -45,14 +54,17 @@ export default {
         height: rem(15px);
         background-color: $dark-grey;
         position: relative;
-        &:after {
-            content: "";
-            width: rem(80px);
+        // &:after {
+        //     content: "";
+            
+        // }
+    }
+    .current-hp {
+            // width: 40%;
             height: rem(15px);
             position: absolute;
             background-color: $red;
             display: inline-block;
-        }
     }
     .ork-img {
         width: rem(231px);
