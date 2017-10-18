@@ -50,7 +50,7 @@ const questions = {
             Object.assign(tmpObj, state.currentQuestion)
             return state.queue.push(tmpObj);
         },
-        updateProgress(state) {
+        reduceOrcHp(state) {
             return state.progress -= state.progressStep;
         }
     },

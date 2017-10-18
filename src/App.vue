@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchQuestions']),
-    ...mapMutations(['reduceAttempt','addLvl','nextQuestion','pushBackInQueue','updateProgress']),
+    ...mapMutations(['reduceAttempt','addLvl','nextQuestion','pushBackInQueue','reduceOrcHp']),
     chekAnsw(text){
       let answer = this.answers.find(answer => 
         answer.id === this.currentQuestion.id
@@ -72,7 +72,7 @@ export default {
       console.log('правильно')
       this.addLvl();
       this.nextQuestion();
-      this.updateProgress();
+      this.reduceOrcHp();
     },
     wrongAnswer(){
       console.log('не правильно')
@@ -87,5 +87,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped src='./styles/layout.scss'>
+<style lang="scss" scoped src='./styles/app.scss'>
 </style>

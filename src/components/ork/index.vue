@@ -20,7 +20,7 @@ export default {
     },
     data(){
         return {
-           
+        
         }
     }
 }
@@ -65,6 +65,7 @@ export default {
             position: absolute;
             background-color: $red;
             display: inline-block;
+            transition: 1.5s;
     }
     .ork-img {
         width: rem(231px);

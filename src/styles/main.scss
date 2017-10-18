@@ -1,0 +1,38 @@
+@import './variables.scss';
+@import './mixins.scss';
+body,
+html {
+    height: 100%;
+    @include tab {
+        font-size: 14px;
+    }
+    @include mob {
+        font-size: 13px;
+    }
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    font-family: 'PixelDigivolveCyrillic', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.42;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: normal;
+}
