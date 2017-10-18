@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentQuestion','answers','attempt','lvl']),
+    ...mapGetters(['queue','currentQuestion','answers','attempt','lvl']),
   },
   components:{
     appHeader,
@@ -59,30 +59,42 @@ export default {
   },
   methods: {
     ...mapActions(['fetchQuestions']),
-    ...mapMutations(['reduceAttempt','addLvl','nextQuestion']),
+    ...mapMutations(['reduceAttempt','addLvl','nextQuestion','pushBackInQueue']),
     chekAnsw(text){
-      this.answers.forEach(answer => {
-        if (answer.id === this.currentQuestion.id) {
-          if (answer.is_correct === text){
-            this.rightAnswer();
-            this.nextQuestion();
-          } else {
-            this.wrongAnswer();
-          }
-        }
-      });
+      let answer = this.answers.find(answer => 
+        answer.id === this.currentQuestion.id
+      )
+      if (answer.is_correct === text){
+        this.rightAnswer();
+      }else{
+        this.wrongAnswer();
+      }
+    
     },
     rightAnswer(){
       console.log('правильно')
       this.addLvl();
+      this.nextQuestion();
     },
     wrongAnswer(){
       console.log('не правильно')
       this.reduceAttempt();
+      this.pushBackInQueue();
+      this.nextQuestion();
+      
     }
   },
   created(){
     this.fetchQuestions();
+    // console.log('очередь вопросов :', this.queue);
+    // console.log('текущий вопрос',this.currentQuestion);
+    // console.log(this.answers);
+    // console.log(this.attempt);
+    // console.log(this.lvl);
+  },
+  mounted(){
+    // console.log('очередь вопросов :', this.queue);
+    // console.log('текущий вопрос',this.currentQuestion);
   }
 }
 </script>

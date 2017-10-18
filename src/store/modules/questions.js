@@ -6,10 +6,13 @@ const questions = {
         queue: [],
         currentQuestion: {},
         answers: [],
-        attempt: 10,
+        attempt: 3,
         lvl: 1
     },
     getters: {
+        queue(state) {
+            return state.queue;
+        },
         currentQuestion(state) {
             return state.currentQuestion;
         },
@@ -25,13 +28,25 @@ const questions = {
     },
     mutations: {
         reduceAttempt(state) {
-            return state.attempt--;
+            if (state.attempt > 0) {
+                if (state.attempt === 1) {
+                    console.log('Игра закончена')
+                    return state.attempt--
+                } else {
+                    return state.attempt--;
+                }
+            }
         },
         addLvl(state) {
             return state.lvl++;
         },
         nextQuestion(state) {
-            return state.currentQuestion = state.queue.pop();
+            return state.queue.length > 0 ? state.currentQuestion = state.queue.shift() : null;
+        },
+        pushBackInQueue(state) {
+            let tmpObj = {};
+            Object.assign(tmpObj, state.currentQuestion)
+            return state.queue.push(tmpObj);
         }
     },
     actions: {
@@ -42,10 +57,10 @@ const questions = {
                 .then(response => {
                     response.body.questions.forEach(function(question) {
                         shuffleArray(question.answers);
-                    }, this);
+                    });
                     shuffleArray(response.body.questions);
-                    state.queue = response.body.questions;
                     state.currentQuestion = response.body.questions.pop();
+                    state.queue = response.body.questions;
                     state.answers = response.body.answers;
                 }, error => {
                     console.error(error);
