@@ -2,17 +2,19 @@
   #app
     //- pre {{currentQuestion}}
     .content
-      app-header(
-        :hearts='attempt'
-        :playerLvl='lvl'
-      )
-      app-firebool
-      app-hero(
-        :question='currentQuestion.questions_title'
-      )
-      app-ork(
-        :percent='progress'
-      )
+      .header
+        app-header(
+          :hearts='attempt'
+          :playerLvl='lvl'
+        )
+      .main-section
+        app-firebool
+        app-hero(
+          :question='currentQuestion.questions_title'
+        )
+        app-ork(
+          :percent='progress'
+        )
     .footer
       .left 
         .text 

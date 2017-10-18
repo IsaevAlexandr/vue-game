@@ -43,7 +43,7 @@ const questions = {
             return state.lvl++;
         },
         nextQuestion(state) {
-            return state.queue.length > 0 ? state.currentQuestion = state.queue.shift() : null;
+            return state.queue.length > 0 ? state.currentQuestion = state.queue.shift() : state.currentQuestion = {};
         },
         pushBackInQueue(state) {
             let tmpObj = {};
@@ -51,14 +51,14 @@ const questions = {
             return state.queue.push(tmpObj);
         },
         reduceOrcHp(state) {
-            return state.progress -= state.progressStep;
+            return state.progress > 0 ? state.progress -= state.progressStep : null;
         }
     },
     actions: {
         fetchQuestions({ state, rootGetters }) {
             const { $http } = rootGetters;
 
-            $http.get('/src/components/data.json')
+            $http.get('/data.json')
                 .then(response => {
                     response.body.questions.forEach(function(question) {
                         shuffleArray(question.answers);

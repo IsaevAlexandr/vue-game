@@ -54,14 +54,10 @@ export default {
         height: rem(15px);
         background-color: $dark-grey;
         position: relative;
-        // &:after {
-        //     content: "";
-            
-        // }
+
     }
     .current-hp {
-            // width: 40%;
-            height: rem(15px);
+            height: 100%;
             position: absolute;
             background-color: $red;
             display: inline-block;
