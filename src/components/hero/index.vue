@@ -10,7 +10,7 @@ export default {
     props: {
         question: {
             type: String,
-            default: "Здесь должен быть вопрос"
+            default: "похоже, я все-таки, что то знаю!"
         }
     },
     data(){

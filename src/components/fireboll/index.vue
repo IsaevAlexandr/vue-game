@@ -2,7 +2,7 @@
     .fireboll
         .fireboll-img(
             @click='addFlightClass'
-            :class='{success : successAnimationStatus}'
+            :class='{success : successAnimationStatus, failure : failureAnimationStatus}'
         )
 </template>
 
@@ -45,7 +45,8 @@ $width: 181px;
     background-image: url('~images/fireball-01.svg');
     @include image;
     position: relative;
-    align-self: center;
+    align-self: flex-end;
+    bottom: 10%;
     left: 0;
     opacity: 0;
 }
@@ -66,4 +67,17 @@ $width: 181px;
     100% {left: 100%;opacity: 0}
 }
 
+.failure {
+    animation: failure 1s linear;
+    animation-fill-mode: forwards;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+@keyframes failure {
+    45% {left: 100%; transform: rotate(0deg)}
+    58% {left: 100%; transform: scale(1) rotate(180deg)}
+    85% {left: 0; transform: scale(2) rotate(180deg); opacity: 1;}
+    100% {left: 0;opacity: 0; transform: scale(2) rotate(180deg);}
+}
 </style>

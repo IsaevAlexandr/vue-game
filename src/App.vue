@@ -92,26 +92,38 @@ export default {
         this.addLvl();
         this.nextQuestion();
         this.reduceOrcHp();
+
         /* Плавное появление текста вопроса */
-        this.smoothTextAppearance();
+        // this.smoothTextAppearance();
 
       },this.ANMATION_DURATION) 
     },
     wrongAnswer(){
       console.log('не правильно')
-      this.animateHearts();
+      this.failureAnimation();
+
+      setTimeout(()=>{
+        this.animateHearts();
 
       // Костыль с анимацией плавного изчезновения сердец
-      setTimeout(()=>{
-        this.heartAnimationStatus = false;
-        this.reduceAttempt();
-      }, this.ANMATION_DURATION)
+        setTimeout(()=>{
+          this.heartAnimationStatus = false;
+          this.reduceAttempt();
+        }, this.ANMATION_DURATION)
 
-      this.pushBackInQueue();
-      this.nextQuestion();
+        this.pushBackInQueue();
+        this.nextQuestion();
+        
+
+        /* Плавное появление текста вопроса */
+        // this.smoothTextAppearance();
+
+      },this.ANMATION_DURATION)
+
+      
 
       /* Плавное появление текста вопроса */
-      this.smoothTextAppearance();  
+      // this.smoothTextAppearance();  
       
     },
     animateHearts(){
@@ -126,6 +138,12 @@ export default {
       this.firebollSuccess = true;
       setTimeout(()=>{
         this.firebollSuccess = false;
+      }, this.ANMATION_DURATION)
+    },
+    failureAnimation(){
+      this.firebollfailure = true;
+      setTimeout(()=>{
+        this.firebollfailure = false;
       }, this.ANMATION_DURATION)
     }
   },
