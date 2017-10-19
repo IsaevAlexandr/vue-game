@@ -22,10 +22,12 @@ export default {
 
 <style lang='scss' scoped>
 .hero {
-    position: absolute;
-    z-index: 1;
-    bottom: 17%;
-    left: 0;
+    // position: absolute;
+    // z-index: 1;
+    // bottom: 17%;
+    // left: 0;
+    position: relative;
+    margin-left: rem(110px);
 }
 .hero-img {
     width: rem(218px);

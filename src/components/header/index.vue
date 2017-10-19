@@ -5,16 +5,18 @@
             .lvl lvl {{playerLvl}} 
             .vertical-line | 
             .js {{scill}}
-            .hearts(v-for='heart in hearts')
+            .hearts(
+                v-for='heart in hearts'
+                :class='{"fade-out" : heartAnimationStatus}'
+                :style="{transition: animationDuration / 1000 + 's'}"
+            )
         .right #br41n570rm
 </template>
 <script>
 export default {
     data(){
         return {
-            lvl: 1,
             scill: 'js'
-            // hearts: 3
         }
     },
     props: {
@@ -25,8 +27,17 @@ export default {
         playerLvl: {
             type: Number,
             default: 1
+        },
+        heartAnimationStatus:{
+            type: Boolean,
+            default: false
+        },
+        animationDuration: {
+            type: Number,
+            default: 300
         }
     },
+    
     methods: {
         
     }
@@ -64,6 +75,15 @@ export default {
         @include image;
         align-self: center;
         margin-right: rem(5px);
+        // transition: 1s;
+        
+    }
+
+    .fade-out {
+        &:last-child{
+            opacity: 0;
+            // transition: 1s;
+        }
     }
 
     .right {

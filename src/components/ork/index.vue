@@ -5,7 +5,7 @@
             .hp-percent {{percent}} %
             .hp-bar
                 .current-hp(
-                    :style="{ width:percent + '%'}"
+                    :style="{ width:percent + '%', transition: animationDuration / 1000 + 's'}"
                 )
         .ork-img
 </template>
@@ -16,6 +16,10 @@ export default {
         percent: {
             type: Number,
             default: 50
+        },
+        animationDuration: {
+            type: Number,
+            default: 300
         }
     },
     data(){
@@ -28,13 +32,7 @@ export default {
 
 <style lang='scss' scoped>
     .ork {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 1;
-        bottom: 17%;
-        right: 0;
+        position: relative;
     }
     .ork-name {
         color: #444444;

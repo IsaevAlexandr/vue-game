@@ -6,15 +6,23 @@
         app-header(
           :hearts='attempt'
           :playerLvl='lvl'
+          :heartAnimationStatus='heartAnimationStatus'
+          :animationDuration='ANMATION_DURATION'
         )
       .main-section
-        app-firebool
+        
         app-hero(
           :question='currentQuestion.questions_title'
         )
+        app-firebool(
+          :successAnimationStatus='firebollSuccess'
+          :failureAnimationStatus='firebollfailure'
+        )
         app-ork(
           :percent='progress'
+          :animationDuration='ANMATION_DURATION'
         )
+        .treasure
     .footer
       .left 
         .text 
@@ -44,7 +52,10 @@ export default {
   name: 'app',
   data () {
     return {
-      
+      heartAnimationStatus: false,
+      firebollSuccess: false,
+      firebollfailure: false,
+      ANMATION_DURATION: 1000
     }
   },
   computed: {
@@ -78,9 +89,19 @@ export default {
     },
     wrongAnswer(){
       console.log('не правильно')
-      this.reduceAttempt();
+      this.animateHearts();
+
+      // Костыль с анимацией плавного изчезновения сердец
+      setTimeout(()=>{
+        this.heartAnimationStatus = false;
+        this.reduceAttempt();
+      }, this.ANMATION_DURATION)
+
       this.pushBackInQueue();
       this.nextQuestion();
+    },
+    animateHearts(){
+      this.heartAnimationStatus = true;
     }
   },
   created(){
