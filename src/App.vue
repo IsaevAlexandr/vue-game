@@ -84,11 +84,18 @@ export default {
     },
     rightAnswer(){
       console.log('правильно')
-      this.addLvl();
-      this.nextQuestion();
-      this.reduceOrcHp();
-      /* Плавное появление текста вопроса */
-      this.smoothTextAppearance();
+      this.successAnimation();
+
+      /* задержка на время анимации */
+      setTimeout(()=>{
+
+        this.addLvl();
+        this.nextQuestion();
+        this.reduceOrcHp();
+        /* Плавное появление текста вопроса */
+        this.smoothTextAppearance();
+
+      },this.ANMATION_DURATION) 
     },
     wrongAnswer(){
       console.log('не правильно')
@@ -104,7 +111,8 @@ export default {
       this.nextQuestion();
 
       /* Плавное появление текста вопроса */
-      this.smoothTextAppearance();      
+      this.smoothTextAppearance();  
+      
     },
     animateHearts(){
       this.heartAnimationStatus = true;
@@ -113,6 +121,12 @@ export default {
     smoothTextAppearance(){
       let elem = document.querySelector('.question');
       smoothTextAppearance(elem);
+    },
+    successAnimation(){
+      this.firebollSuccess = true;
+      setTimeout(()=>{
+        this.firebollSuccess = false;
+      }, this.ANMATION_DURATION)
     }
   },
   created(){

@@ -1,8 +1,8 @@
 <template lang='pug'>
-    .firebool()
-        .firebool-img(
+    .fireboll
+        .fireboll-img(
             @click='addFlightClass'
-            :class='{flight : isFlight}'
+            :class='{success : successAnimationStatus}'
         )
 </template>
 
@@ -33,28 +33,37 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.firebool {
-    // position: absolute;
-    // z-index: 1;
-    // bottom: 30%;
-    // left: 15%;
+.fireboll {
     flex: 1;
+    display: flex;
+    align-self: stretch;
 }
-.firebool-img {
-    width: rem(181px);
+$width: 181px;
+.fireboll-img {
+    width: $width;
     height: rem(100px);
     background-image: url('~images/fireball-01.svg');
     @include image;
     position: relative;
+    align-self: center;
+    left: 0;
+    opacity: 0;
 }
 
-.flight {
-    animation: flight 1s;
+.success{
+    animation: success 1s linear;
     animation-fill-mode: forwards;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s;
+    // left: 100%
 }
 
-@keyframes flight {
-    50% {transform: translateX(100%) scale(1.5)}
+@keyframes success {
+    25% {transform: scale(1)}
+    70% {transform: scale(1.5)}
+    85% {left: 100%; transform: scale(2);opacity: 1}
+    100% {left: 100%;opacity: 0}
 }
 
 </style>
