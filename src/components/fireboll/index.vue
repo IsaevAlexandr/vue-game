@@ -75,8 +75,8 @@ $width: 181px;
     transition: opacity 0.3s;
 }
 @keyframes failure {
-    45% {left: 100%; transform: rotate(0deg)}
-    58% {left: 100%; transform: scale(1) rotate(180deg)}
+    35% {left: 50%; transform: rotate(0deg)}
+    58% {left: 50%; transform: scale(1) rotate(180deg)}
     85% {left: 0; transform: scale(2) rotate(180deg); opacity: 1;}
     100% {left: 0;opacity: 0; transform: scale(2) rotate(180deg);}
 }
