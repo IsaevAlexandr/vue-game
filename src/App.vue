@@ -1,6 +1,5 @@
 <template lang='pug'>
   #app
-    //- pre {{currentQuestion}}
     .content
       .header
         app-header(
@@ -46,7 +45,9 @@ import appHero from './components/hero';
 import appOrk from './components/ork';
 import appFirebool from './components/fireboll';
 import appQuestionItem from './components/question-item';
-import {mapActions, mapGetters, mapMutations} from 'vuex'
+import {mapActions, mapGetters, mapMutations} from 'vuex';
+
+import {smoothTextAppearance} from './assets/scripts/helpers.js';
 
 export default {
   name: 'app',
@@ -86,6 +87,8 @@ export default {
       this.addLvl();
       this.nextQuestion();
       this.reduceOrcHp();
+      /* Плавное появление текста вопроса */
+      this.smoothTextAppearance();
     },
     wrongAnswer(){
       console.log('не правильно')
@@ -99,9 +102,17 @@ export default {
 
       this.pushBackInQueue();
       this.nextQuestion();
+
+      /* Плавное появление текста вопроса */
+      this.smoothTextAppearance();      
     },
     animateHearts(){
       this.heartAnimationStatus = true;
+    },
+    /* Плавное появление текста вопроса */
+    smoothTextAppearance(){
+      let elem = document.querySelector('.question');
+      smoothTextAppearance(elem);
     }
   },
   created(){

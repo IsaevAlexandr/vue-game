@@ -1,4 +1,4 @@
-import shuffleArray from './shuffleArray'
+import { shuffleArray } from '../../assets/scripts/helpers'
 
 const questions = {
 
