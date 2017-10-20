@@ -93,7 +93,7 @@ export default {
       }
       this.canClick = false;
       setTimeout(()=>{
-        this.blockClick = true;
+        this.canClick = true;
       }, this.ANMATION_DURATION)
     },
     rightAnswer(){
