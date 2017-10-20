@@ -16,12 +16,18 @@ export default {
         text: {
             type: String,
             default: 'Вопрос'
+        },
+        /* prevet multiclick */
+        processing: {
+            type: Boolean,
+            default: true
         }
     },
     methods:{
-        checkAnswer(text){
-            // console.log(this.text)
-            this.$emit('checkAnswer',this.text);
+        checkAnswer(e,text){
+            if (this.processing){
+                this.$emit('checkAnswer',this.text);
+            }
         }
     }
 }
@@ -32,6 +38,7 @@ export default {
         display: flex;
         flex: 50%;
         margin-bottom: rem(25px);
+        cursor: pointer;
     }
     .number {
         background-color: #c3c421;
@@ -50,6 +57,5 @@ export default {
         font-weight: 400;
         line-height: rem(56.22px);
         align-self: center;
-
     }
 </style>

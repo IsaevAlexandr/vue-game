@@ -34,7 +34,7 @@ export default {
 }
 .question {
     padding: rem(20px);
-    box-shadow: 7px 8px 0 #919191;
+    box-shadow: rem(7px) rem(8px) 0 #919191;
     background-color: $white;
     position: absolute;
     bottom: 110%;

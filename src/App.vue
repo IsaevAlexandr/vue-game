@@ -20,15 +20,15 @@
         app-ork(
           :percent='progress'
           :animationDuration='ANMATION_DURATION'
+          :isDialogShow='orkTalk'
+          :msg='orkMsg'
         )
         .treasure
     .footer
       .end-game-block(
           v-show='isGameOver'
         )
-        .end-game-message(
-          :class='{show: isGameOver}'
-        ) {{endGameMsg}}
+        .end-game-message {{endGameMsg}}
       .left 
         .text 
             |твой 
@@ -42,6 +42,7 @@
             :text='answer'
             :key='index'
             @checkAnswer='chekAnsw'
+            :processing='canClick'
           )
 </template>
 
@@ -62,7 +63,10 @@ export default {
       ANMATION_DURATION: 1000,
       isGameOver: false,
       endGameMsg: "",
-      OrkTalk: ""
+      orkTalk: false,
+      orkMsg: "Сдавайся!",
+      /* prevet multiclick */
+      canClick: true
     }
   },
   computed: {
@@ -87,6 +91,10 @@ export default {
       }else{
         this.wrongAnswer();
       }
+      this.canClick = false;
+      setTimeout(()=>{
+        this.blockClick = true;
+      }, this.ANMATION_DURATION)
     },
     rightAnswer(){
       console.log('правильно')
@@ -95,6 +103,7 @@ export default {
         this.addLvl();
         this.nextQuestion();
         this.reduceOrcHp();
+        this.showOrkTalk("Ай ай ай!");
         this.checkEndGame();
       }, this.ANMATION_DURATION) 
     },
@@ -105,18 +114,33 @@ export default {
         this.reduceAttempt();
         this.pushBackInQueue();
         this.nextQuestion();
+        this.showOrkTalk();
         this.checkEndGame();
       }, this.ANMATION_DURATION)
     },
     checkEndGame(){
+      /* Успех */
       if (this.progress === 0){
         console.log('Игра закончена!');
         this.isGameOver = true;
         this.endGameMsg = 'Это было не легко, но вы победили!'
+
+        /* Оставить диалог орка */
+        this.orkMsg = "Но я же был так хорош..."
+        setTimeout(() => {
+          this.orkTalk = true;
+        }, this.ANMATION_DURATION * 2.1)
       }
+      /* Неудача */
       if (this.attempt === 0){
         this.isGameOver = true;
         this.endGameMsg = 'Вы проиграли! Возможно, если вы будете усерднее заниматься, то у вас получится одолеть JavaSript монстра! А, может быть, и нет...' 
+        
+        /* Оставить диалог орка */
+        this.orkMsg = "Ха ха, ты еще слишком неопытен, цыпленок!"
+        setTimeout(() => {
+          this.orkTalk = true;
+        }, this.ANMATION_DURATION * 2.1)
       }
     },
     successAnimation(){
@@ -131,8 +155,12 @@ export default {
         this.firebollfailureAnimation = false;
       }, this.ANMATION_DURATION)
     },
-    showOrkTalk(){
-      this.OrkTalk
+    showOrkTalk(msg = "Сдавайся!"){
+      this.orkMsg = msg;
+      this.orkTalk = true;
+      setTimeout(() => {
+        this.orkTalk = false;
+      }, this.ANMATION_DURATION * 2)
     }
   },
   created(){
