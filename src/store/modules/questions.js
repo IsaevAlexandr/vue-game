@@ -31,12 +31,7 @@ const questions = {
     mutations: {
         reduceAttempt(state) {
             if (state.attempt > 0) {
-                if (state.attempt === 1) {
-                    console.log('Игра закончена')
-                    return state.attempt--
-                } else {
-                    return state.attempt--;
-                }
+                return state.attempt--;
             }
         },
         addLvl(state) {

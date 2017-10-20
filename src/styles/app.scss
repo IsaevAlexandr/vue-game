@@ -29,6 +29,7 @@
     justify-content: center;
     /* должны быть одинаковые с футером */
     padding: rem(20px);
+    position: relative;
 }
 
 .left {
@@ -60,6 +61,7 @@
     display: flex;
     align-items: flex-end;
     flex: 1;
+    padding-top: rem(40px);
 }
 
 .treasure {
@@ -69,4 +71,33 @@
     background-image: url('~images/safe-01.svg');
     @include image;
     box-shadow: 0 0 109px 2px rgba(231, 155, 34, 0.72);
+}
+
+.end-game-block {
+    background-color: #54422a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // opacity: 0;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.end-game-message {
+    opacity: 0;
+    color: $white;
+    font-size: rem(49px);
+    font-weight: 400;
+    // transition: 3s;
+    max-width: 50%;
+    text-align: center;
+}
+
+.show {
+    opacity: 1;
+    transition: 3s;
 }

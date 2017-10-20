@@ -2,10 +2,10 @@
   #app
     .content
       .header
+        //- :heartAnimationStatus='heartAnimationStatus'
         app-header(
           :hearts='attempt'
           :playerLvl='lvl'
-          :heartAnimationStatus='heartAnimationStatus'
           :animationDuration='ANMATION_DURATION'
         )
       .main-section
@@ -14,8 +14,8 @@
           :question='currentQuestion.questions_title'
         )
         app-firebool(
-          :successAnimationStatus='firebollSuccess'
-          :failureAnimationStatus='firebollfailure'
+          :successAnimationStatus='firebollSuccessAbimation'
+          :failureAnimationStatus='firebollfailureAnimation'
         )
         app-ork(
           :percent='progress'
@@ -23,6 +23,12 @@
         )
         .treasure
     .footer
+      .end-game-block(
+          v-show='isGameOver'
+        )
+        .end-game-message(
+          :class='{show: isGameOver}'
+        ) {{endGameMsg}}
       .left 
         .text 
             |твой 
@@ -47,16 +53,16 @@ import appFirebool from './components/fireboll';
 import appQuestionItem from './components/question-item';
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 
-import {smoothTextAppearance} from './assets/scripts/helpers.js';
-
 export default {
   name: 'app',
   data () {
     return {
-      heartAnimationStatus: false,
-      firebollSuccess: false,
-      firebollfailure: false,
-      ANMATION_DURATION: 1000
+      firebollSuccessAbimation: false,
+      firebollfailureAnimation: false,
+      ANMATION_DURATION: 1000,
+      isGameOver: false,
+      endGameMsg: "",
+      OrkTalk: ""
     }
   },
   computed: {
@@ -85,66 +91,48 @@ export default {
     rightAnswer(){
       console.log('правильно')
       this.successAnimation();
-
-      /* задержка на время анимации */
       setTimeout(()=>{
-
         this.addLvl();
         this.nextQuestion();
         this.reduceOrcHp();
-
-        /* Плавное появление текста вопроса */
-        // this.smoothTextAppearance();
-
-      },this.ANMATION_DURATION) 
+        this.checkEndGame();
+      }, this.ANMATION_DURATION) 
     },
     wrongAnswer(){
       console.log('не правильно')
       this.failureAnimation();
-
       setTimeout(()=>{
-        this.animateHearts();
-
-      // Костыль с анимацией плавного изчезновения сердец
-        setTimeout(()=>{
-          this.heartAnimationStatus = false;
-          this.reduceAttempt();
-        }, this.ANMATION_DURATION)
-
+        this.reduceAttempt();
         this.pushBackInQueue();
         this.nextQuestion();
-        
-
-        /* Плавное появление текста вопроса */
-        // this.smoothTextAppearance();
-
-      },this.ANMATION_DURATION)
-
-      
-
-      /* Плавное появление текста вопроса */
-      // this.smoothTextAppearance();  
-      
+        this.checkEndGame();
+      }, this.ANMATION_DURATION)
     },
-    animateHearts(){
-      this.heartAnimationStatus = true;
-    },
-    /* Плавное появление текста вопроса */
-    smoothTextAppearance(){
-      let elem = document.querySelector('.question');
-      smoothTextAppearance(elem);
+    checkEndGame(){
+      if (this.progress === 0){
+        console.log('Игра закончена!');
+        this.isGameOver = true;
+        this.endGameMsg = 'Это было не легко, но вы победили!'
+      }
+      if (this.attempt === 0){
+        this.isGameOver = true;
+        this.endGameMsg = 'Вы проиграли! Возможно, если вы будете усерднее заниматься, то у вас получится одолеть JavaSript монстра! А, может быть, и нет...' 
+      }
     },
     successAnimation(){
-      this.firebollSuccess = true;
+      this.firebollSuccessAbimation = true;
       setTimeout(()=>{
-        this.firebollSuccess = false;
+        this.firebollSuccessAbimation = false;
       }, this.ANMATION_DURATION)
     },
     failureAnimation(){
-      this.firebollfailure = true;
+      this.firebollfailureAnimation = true;
       setTimeout(()=>{
-        this.firebollfailure = false;
+        this.firebollfailureAnimation = false;
       }, this.ANMATION_DURATION)
+    },
+    showOrkTalk(){
+      this.OrkTalk
     }
   },
   created(){

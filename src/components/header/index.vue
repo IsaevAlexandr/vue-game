@@ -5,10 +5,10 @@
             .lvl lvl {{playerLvl}} 
             .vertical-line | 
             .js {{scill}}
+                //- :class='{"fade-out" : heartAnimationStatus}'
+                //- :style="{transition: animationDuration / 1000 + 's'}"
             .hearts(
                 v-for='heart in hearts'
-                :class='{"fade-out" : heartAnimationStatus}'
-                :style="{transition: animationDuration / 1000 + 's'}"
             )
         .right #br41n570rm
 </template>
@@ -79,12 +79,12 @@ export default {
         
     }
 
-    .fade-out {
-        &:last-child{
-            opacity: 0;
-            // transition: 1s;
-        }
-    }
+    // .fade-out {
+    //     &:last-child{
+    //         opacity: 0;
+    //         // transition: 1s;
+    //     }
+    // }
 
     .right {
         color: $black;
