@@ -46,7 +46,15 @@ const questions = {
             return state.queue.push(tmpObj);
         },
         reduceOrcHp(state) {
-            return state.progress > 0 ? state.progress -= state.progressStep : null;
+            // return state.progress > 0 ? state.progress -= state.progressStep : null;
+
+            if (state.progress > 0) {
+                if (state.progress <= state.progressStep) {
+                    return state.progress = 0;
+                }
+                return state.progress -= state.progressStep;
+            }
+            return null;
         }
     },
     actions: {
@@ -59,7 +67,8 @@ const questions = {
                         shuffleArray(question.answers);
                     });
                     shuffleArray(response.body.questions);
-                    state.progressStep = 100 / response.body.questions.length;
+                    state.progressStep = Math.ceil(100 / response.body.questions.length);
+                    console.log(state.progressStep)
                     state.currentQuestion = response.body.questions.pop();
                     state.queue = response.body.questions;
                     state.answers = response.body.answers;

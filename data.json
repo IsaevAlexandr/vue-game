@@ -6,18 +6,28 @@
         },
         {
             "id": 2,
-            "questions_title": "Второй вопрос",
-            "answers": ["лала", "фаф", "2", "ямба"]
+            "questions_title": "Функция удаляет первый элемент из массива и возвращает его?",
+            "answers": ["shift", "slice", "split", "pop"]
         },
         {
             "id": 3,
-            "questions_title": "Третий вопрос",
-            "answers": ["па", "21", "афы", "правильный ответ"]
+            "questions_title": "Как добавить класс myClass к элементу el в JavaScript",
+            "answers": ["el.style.add('myClass');", "el.className.add('myClass);", "el.classList.add('myClass');", "el.classCss.add('myClass');"]
         },
         {
             "id": 4,
-            "questions_title": "Четвертый вопрос",
-            "answers": ["var", "может быть", "нет", "все верно"]
+            "questions_title": "В объектной модели браузера (BOM) navigator - объект в котором есть общие данные про операционную систему и браузер, а так же различные методы и свойства для работы с браузером. Где хранится информация о Вашем браузере?",
+            "answers": ["navigator.appName", "navigator.appCodeName", "navigator.userAgent", "navigator.platform"]
+        },
+        {
+            "id": 5,
+            "questions_title": "После того, как событие сработает на элементе, оно также сработает на родителях, вверх по дереву DOM, если это событие нигде принудительно не прервут. Это?",
+            "answers": ["опускание(lowering)", "захват(capturing)", "всплытие(bubbling)", "снижение(reduction)"]
+        },
+        {
+            "id": 6,
+            "questions_title": "Результат работы, какого выражения вернет третий символ, если в переменной str хранится строка?",
+            "answers": ["str.indefOf('2')", "str.split('2')", "str.slice(2)", "str.charAt(2)"]
         }
     ],
     "answers": [{
@@ -26,15 +36,23 @@
         },
         {
             "id": 2,
-            "is_correct": "фаф"
+            "is_correct": "shift"
         },
         {
             "id": 3,
-            "is_correct": "правильный ответ"
+            "is_correct": "el.classList.add('myClass');"
         },
         {
             "id": 4,
-            "is_correct": "все верно"
+            "is_correct": "navigator.userAgent"
+        },
+        {
+            "id": 5,
+            "is_correct": "всплытие(bubbling)"
+        },
+        {
+            "id": 6,
+            "is_correct": "str.charAt(2)"
         }
     ]
 }
